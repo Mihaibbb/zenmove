@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const { 
+    getRoute,
     addRoute,
     removeRoute,
     addLocation,
@@ -8,6 +9,7 @@ const {
     removeLocation,
 } = require("../controllers/bus");
 
+router.get("/get-routes", getRoute)
 router.post("/add-route", addRoute);
 router.delete("/remove-route/:routeId", removeRoute);
 router.post("/add-location", addLocation);

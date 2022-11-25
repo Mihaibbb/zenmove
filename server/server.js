@@ -25,4 +25,3 @@ app.use("/tramway", tramwayRouter);
 app.use("/pedestrial", pedestrialRouter);
 
 app.listen(8000, () => console.log(""));
-
