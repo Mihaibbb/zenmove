@@ -1,16 +1,17 @@
 import MapView, { MapMarker, Marker } from 'react-native-maps';
-import * as Location from 'expo-location';
+import GetLocation from 'react-native-get-location';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { Dimensions, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import styles from './Styles';
-import { Feather, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient';
 import mainColors from '../../Colors/main'; 
 import Categories from '../../Categories/Categories';
 import getDistance from '../../DistanceGeolocation/DistanceGeolocation';
 import { useIsFocused } from '@react-navigation/native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faAngleLeft, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Map = ({ route, navigation }) => {
 
@@ -30,25 +31,30 @@ const Map = ({ route, navigation }) => {
 
     useEffect(() => {
         (async () => {
-            
-            let { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
-                return;
-            }
-    
-            let location = await Location.getCurrentPositionAsync({
-                accuracy: Location.Accuracy.Low
-            });
 
-            console.log(location);
-            setLocation(location);
-            setInitialRegion({
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-                latitudeDelta: 0.005,
-                longitudeDelta: 0.005
-            });
+            try {
+                const data = await GetLocation.getCurrentPosition({
+                    enableHighAccuracy: true,
+                    timeout: 0
+                });
+
+                console.log("DATA BOY", data.longitude);
+
+                setLocation(data);
+                setInitialRegion({
+                    latitude: data.latitude,
+                    longitude: data.longitude,
+                    latitudeDelta: 0.005,
+                    longitudeDelta: 0.005
+                });
+
+              
+            } catch (e) {
+                console.log(e);
+            }
+            
+            
+           
             
         })();
     }, [route, navigation, isFocused]);
@@ -77,16 +83,16 @@ const Map = ({ route, navigation }) => {
 
     useEffect(() => {
         if (!location) return;
-        setLatitude(location.coords.latitude);
-        setLongitude(location?.coords?.longitude);
+        setLatitude(location.latitude);
+        setLongitude(location.longitude);
         
         setCloseRoutes([
             {
                 timeRemained: 22700,
                 distance: 2000,
                 arrivesAt: new Date().getTime() + 1000 * 60,
-                latitude: location.coords.latitude + 0.001,
-                longitude: location.coords.longitude + 0.001,
+                latitude: location.latitude + 0.001,
+                longitude: location.longitude + 0.001,
                 vehicleName: "B 34 ABC"
             },
     
@@ -94,8 +100,8 @@ const Map = ({ route, navigation }) => {
                 timeRemained: 12650,
                 distance: 3000,
                 arrivesAt: new Date().getTime() + 1000 * 55,
-                latitude: location.coords.latitude + 0.002,
-                longitude: location.coords.longitude + 0.002,
+                latitude: location.latitude + 0.002,
+                longitude: location.longitude + 0.002,
                 vehicleName: "B 34 BCD"
 
     
@@ -105,38 +111,38 @@ const Map = ({ route, navigation }) => {
                 timeRemained: 12750,
                 distance: 3500,
                 arrivesAt: new Date().getTime() + 1000 * 125,
-                latitude: location.coords.latitude + 0.001,
-                longitude: location.coords.longitude + 0.001,
+                latitude: location.latitude + 0.001,
+                longitude: location.longitude + 0.001,
                 vehicleName: "B 35 XYZ"
             }
         ]);
         setStations([
             {
-                latitude: location.coords.latitude + 0.001,
-                longitude: location.coords.longitude + 0.001,
+                latitude: location.latitude + 0.001,
+                longitude: location.longitude + 0.001,
                 arrivesAt: new Date().getTime() + 1000 * 15,
                 vehicleName: "B 38 COD"
             },
 
             {
-                latitude: location.coords.latitude - 0.005,
-                longitude: location.coords.longitude + 0.005,
+                latitude: location.latitude - 0.005,
+                longitude: location.longitude + 0.005,
                 arrivesAt: new Date().getTime() + 1000 * 15,
                 vehicleName: "B 39 LOL"
 
             },
 
             {
-                latitude: location.coords.latitude - 0.007,
-                longitude: location.coords.longitude - 0.007,
+                latitude: location.latitude - 0.007,
+                longitude: location.longitude - 0.007,
                 arrivesAt: new Date().getTime() + 1000 * 25,
                 vehicleName: "BZ 54 SMS"
 
             },
 
             {
-                latitude: location.coords.latitude + 0.05,
-                longitude: location.coords.longitude - 0.025,
+                latitude: location.latitude + 0.05,
+                longitude: location.longitude - 0.025,
                 arrivesAt: new Date().getTime() + 1000 * 5,
                 vehicleName: "CJ 79 DAP"
 
@@ -150,10 +156,10 @@ const Map = ({ route, navigation }) => {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    initLat: location.coords.latitude,
-                    initLng: location.coords.longitude,
-                    finalLat: location.coords.latitude + 0.05,
-                    finalLng: location.coords.longitude - 0.025
+                    initLat: location.latitude,
+                    initLng: location.longitude,
+                    finalLat: location.latitude + 0.05,
+                    finalLng: location.longitude - 0.025
                 })
             };
             try {
@@ -230,8 +236,8 @@ const Map = ({ route, navigation }) => {
                         alignItems: "center"
                     }}
                 >
-                    <FontAwesome5 
-                        name="angle-left" 
+                    <FontAwesomeIcon 
+                        icon={faAngleLeft} 
                         size={30} 
                         color="#fff" 
                     />
@@ -247,7 +253,7 @@ const Map = ({ route, navigation }) => {
                         style={[styles.searchbarInput, {color: "#fff"}]}
                         placeholderTextColor="rgba(255, 255, 255, .4)"
                     />
-                    <FontAwesome5 name="search" size={24} color='#fff' style={styles.searchbarIcon} />
+                    <FontAwesomeIcon icon={faSearch} size={24} color='#fff' style={styles.searchbarIcon} />
                 </View>
 
                 {closeRoutes && closeRoutes.length > 0 && 

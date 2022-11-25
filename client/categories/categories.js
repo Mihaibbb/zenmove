@@ -1,38 +1,38 @@
-import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import styles from '../Screens/SelectAutomobile/Styles';
-
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faBus, faTaxi, faTrain, faTrainTram } from '@fortawesome/free-solid-svg-icons';
 
 const Categories = [
     {
         name: "Bus",
         lightColor: "blue",
         darkColor: "blue2",
-        icon: <Ionicons name="bus-outline" size={50} color='#fff' style={styles.categoryIcon} />,
-        smIcon: <Ionicons name="bus-outline" size={35} color='rgba(255, 255, 255, .7)' style={styles.categoryIcon} />
+        icon: <FontAwesomeIcon icon={faBus} size={50} color='#fff' style={styles.categoryIcon} />,
+        smIcon: <FontAwesomeIcon icon={faBus} size={35} color='rgba(255, 255, 255, .7)' style={styles.categoryIcon} />
     },
 
     {
         name: "Train",
         lightColor: "green",
         darkColor: "green2",
-        icon: <Ionicons name="ios-train-outline" size={50} color='#fff' style={styles.categoryIcon} />,
-        smIcon: <Ionicons name="ios-train-outline" size={35} color='#fff' style={styles.categoryIcon} />
+        icon: <FontAwesomeIcon icon={faTrain} size={50} color='#fff' style={styles.categoryIcon} />,
+        smIcon: <FontAwesomeIcon icon={faTrain} size={35} color='#fff' style={styles.categoryIcon} />
     },
 
     {
         name: "Tramway",
         lightColor: "yellow",
         darkColor: "yellow2",
-        icon: <MaterialIcons name="tram" size={50} color='#fff' style={styles.categoryIcon} />,
-        smIcon: <MaterialIcons name="tram" size={35} color='#fff' style={styles.categoryIcon} />
+        icon: <FontAwesomeIcon icon={faTrainTram} size={50} color='#fff' style={styles.categoryIcon} />,
+        smIcon: <FontAwesomeIcon icon={faTrainTram} size={35} color='#fff' style={styles.categoryIcon} />
     },
 
     {
         name: "Taxi",
         lightColor: "purple",
         darkColor: "purple2",
-        icon: <FontAwesome5 name="taxi" size={50} color='#fff' style={styles.categoryIcon} />,
-        smIcon: <FontAwesome5 name="taxi" size={35} color='#fff' style={styles.categoryIcon} />
+        icon: <FontAwesomeIcon icon={faTaxi} size={50} color='#fff' style={styles.categoryIcon} />,
+        smIcon: <FontAwesomeIcon icon={faTaxi} size={35} color='#fff' style={styles.categoryIcon} />
     }
 ];
 
