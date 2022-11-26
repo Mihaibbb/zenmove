@@ -1,6 +1,6 @@
 import styles from '../Screens/SelectAutomobile/Styles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faBus, faTaxi, faTrain, faTrainTram } from '@fortawesome/free-solid-svg-icons';
+import { faBus, faTaxi, faTrain, faTrainTram, faParking } from '@fortawesome/free-solid-svg-icons';
 
 const Categories = [
     {
@@ -12,28 +12,29 @@ const Categories = [
     },
 
     {
-        name: "Train",
+        name: "Tramway",
         lightColor: "green",
         darkColor: "green2",
-        icon: <FontAwesomeIcon icon={faTrain} size={50} color='#fff' style={styles.categoryIcon} />,
-        smIcon: <FontAwesomeIcon icon={faTrain} size={35} color='#fff' style={styles.categoryIcon} />
-    },
-
-    {
-        name: "Tramway",
-        lightColor: "yellow",
-        darkColor: "yellow2",
         icon: <FontAwesomeIcon icon={faTrainTram} size={50} color='#fff' style={styles.categoryIcon} />,
         smIcon: <FontAwesomeIcon icon={faTrainTram} size={35} color='#fff' style={styles.categoryIcon} />
     },
 
     {
         name: "Taxi",
-        lightColor: "purple",
-        darkColor: "purple2",
+        lightColor: "yellow",
+        darkColor: "yellow2",
         icon: <FontAwesomeIcon icon={faTaxi} size={50} color='#fff' style={styles.categoryIcon} />,
         smIcon: <FontAwesomeIcon icon={faTaxi} size={35} color='#fff' style={styles.categoryIcon} />
-    }
+    },
+
+    {
+        name: "Parking",
+        lightColor: "purple",
+        darkColor: "purple2",
+        icon: <FontAwesomeIcon icon={faParking} size={50} color='#fff' style={styles.categoryIcon} />,
+        smIcon: <FontAwesomeIcon icon={faParking} size={35} color='#fff' style={styles.categoryIcon} />
+    },
+
 ];
 
 export default Categories;

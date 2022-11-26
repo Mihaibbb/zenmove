@@ -21,10 +21,7 @@ const { spawn } = require("child_process");
         console.log(res.toString());
     });
 
-    const py2 = spawn('python3', ['main1.py']);
-    py2.stdout.on('data', res => {
-        console.log(res.toString());
-    });
+   
 
 
 

@@ -1,5 +1,5 @@
 import LinearGradient from "react-native-linear-gradient";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import Categories from "../../Categories/Categories";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -7,6 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import styles from "./Styles";
 import { faAngleLeft, faBible, faMapPin } from "@fortawesome/free-solid-svg-icons";
 import { faClock, faMoneyBill1 } from "@fortawesome/free-regular-svg-icons";
+import { GooglePay } from 'react-native-google-pay';
+
+const allowedCardNetworks = ['VISA', 'MASTERCARD'];
+const allowedCardAuthMethods = ['PAN_ONLY', 'CRYPTOGRAM_3DS'];
 
 const Route = ({ route, navigation }) => {
     
@@ -23,6 +27,54 @@ const Route = ({ route, navigation }) => {
         longitude,
         latitudeDelta: 0.005,
         longitudeDelta: 0.005
+    };
+
+    const buyTicket = async () => {
+        if (Platform.OS === "android") {
+            const requestData = {
+                cardPaymentMethod: {
+                  tokenizationSpecification: {
+                        type: 'PAYMENT_GATEWAY',
+                        // stripe (see Example):
+                        gateway: 'stripe',
+                        gatewayMerchantId: '',
+                        stripe: {
+                            publishableKey: 'pk_test_TYooMQauvdEDq54NiTphI7jx',
+                            version: '2018-11-08',
+                        },
+                        // other:
+                        gateway: 'example',
+                        gatewayMerchantId: 'exampleGatewayMerchantId',
+                    },
+                    allowedCardNetworks,
+                    allowedCardAuthMethods,
+                },
+                transaction: {
+                    totalPrice: '1',
+                    totalPriceStatus: 'FINAL',
+                    currencyCode: 'USD',
+                },
+                merchantName: 'React native Gpay',
+            };
+               
+              // Set the environment before the payment request
+              GooglePay.setEnvironment(GooglePay.ENVIRONMENT_TEST);
+               
+              // Check if Google Pay is available
+              GooglePay.isReadyToPay(allowedCardNetworks, allowedCardAuthMethods)
+                .then((ready) => {
+                  if (ready) {
+                    // Request payment token
+                    GooglePay.requestPayment(requestData)
+                      .then((token) => {
+                        // Send a token to your payment gateway
+                      })
+                      .catch((error) => console.log(error.code, error.message));
+                  }
+            });
+        } else if (Platform.OS === "ios") {
+
+        }
     };
 
     return (
@@ -140,7 +192,12 @@ const Route = ({ route, navigation }) => {
                         style={styles.pay} 
                         colors={["rgb(44,203,115)", "rgb(34,176,76)"]}
                     >
-                        <Text style={styles.payText}>Buy Ticket</Text>
+                        <TouchableOpacity 
+                            style={{ width: "100%", height: "100%" }}
+                            onPress={async () => await buyTicket()}
+                        >
+                            <Text style={styles.payText}>Buy Ticket</Text>
+                        </TouchableOpacity>
                     </LinearGradient>
                 </TouchableOpacity>
             </View>
