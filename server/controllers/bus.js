@@ -26,6 +26,7 @@ exports.editLocation = async (req, res, next) => {
 
 };
 
+
 exports.removeLocation = async (req, res, next) => {
 
 };
