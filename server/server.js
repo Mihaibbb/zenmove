@@ -16,7 +16,7 @@ const pedestrialRouter = require("./routes/pedestrial");
 const { spawn } = require("child_process");
 
 
-    const py = spawn('python3', ['main.py']);
+    const py = spawn('python3', ['./Car-Parking-Space-Counter-Detector-main/main.py']);
     py.stdout.on('data', res => {
         console.log(res.toString());
     });
