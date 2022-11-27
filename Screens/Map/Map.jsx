@@ -47,15 +47,11 @@ const Map = ({ route, navigation }) => {
                     latitudeDelta: 0.005,
                     longitudeDelta: 0.005
                 });
-
-              
+                
             } catch (e) {
                 console.log(e);
             }
-            
-            
-           
-            
+
         })();
     }, [route, navigation, isFocused]);
 

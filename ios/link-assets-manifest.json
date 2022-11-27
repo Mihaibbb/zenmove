@@ -1,0 +1,49 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/SF-Pro-Display-RegularItalic.otf",
+      "sha1": "0807316a4ea2dec16cd3cae47904bc21fca0df04"
+    },
+    {
+      "path": "assets/fonts/SF-Pro-Display-Semibold.otf",
+      "sha1": "56cc1969e1927491ab50635a0d16d4827bbce63c"
+    },
+    {
+      "path": "assets/fonts/SF-Pro-Display-SemiboldItalic.otf",
+      "sha1": "e62f2e25b2192712150a4974d26b82c4b5b1b46c"
+    },
+    {
+      "path": "assets/fonts/SF-Pro-Display-Thin.otf",
+      "sha1": "eca062853d7eae18d64d42aca5c63464729d013d"
+    },
+    {
+      "path": "assets/fonts/SF-Pro-Display-ThinItalic.otf",
+      "sha1": "de477d0891c13e5d42e817446928b4a1adc1d188"
+    },
+    {
+      "path": "assets/fonts/SF-Pro-Rounded-Bold.otf",
+      "sha1": "cdd39cc963a7fb3093abd2cfaa4340a42bd4ebf1"
+    },
+    {
+      "path": "assets/fonts/SF-Pro-Rounded-Light.otf",
+      "sha1": "331a91d16f0ea16e0a3f563b983f6ae45a57633f"
+    },
+    {
+      "path": "assets/fonts/SF-Pro-Rounded-Medium.otf",
+      "sha1": "cb9b87e13f1dae7302b892436538873085eb2d66"
+    },
+    {
+      "path": "assets/fonts/SFProDIsplay-Regular.otf",
+      "sha1": "737ea8c075bdae8392f2c92b17183c270b997f67"
+    },
+    {
+      "path": "assets/fonts/SFProDisplay-Light.otf",
+      "sha1": "499ff875a0b2880976afd58d69592755569086df"
+    },
+    {
+      "path": "assets/fonts/SFProDisplay-Medium.otf",
+      "sha1": "122adb62377e256db0122abefc29295218928fea"
+    }
+  ]
+}
